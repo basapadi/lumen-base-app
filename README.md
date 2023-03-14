@@ -26,5 +26,6 @@
 - User Login using JWT Auth
 - User Logout
 
-#### Installed Middlewares
+#### Available Features
 - Authentication Middleware
+- Data Pagination
