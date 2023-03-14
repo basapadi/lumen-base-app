@@ -35,9 +35,9 @@
 DbTrait.php use for data pagination
 > Available methods
 - _setDefaultLimit(limit)_
-  set default limit pagination data
+  - set default limit pagination data
 - _limiter(model , defaultLimit = 10)_
-    set limit record for model
+    - set limit record for model
     - **@param** Illuminate\Database\Eloquent\Builder model
     - **@param** int defaultLimit
     - **@return** Illuminate\Database\Eloquent\Builder
