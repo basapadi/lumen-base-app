@@ -31,7 +31,7 @@
 
 ## Documentation
 
-#### DbTrait.php
+##### App\Traits\DbTrait.php
 DbTrait.php use for data pagination
 > Available methods
 - _setDefaultLimit(limit)_
