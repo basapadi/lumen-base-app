@@ -8,21 +8,22 @@ trait UploadTrait {
     /**
      * @author bachtiarpanjaitan <bachtiarpanjaitan0@gmail.com>
      * @param $req Illuminate\Http\Request;
-     * @param $imageAttr string Attribute image request, default: image
      * @param $options array 
      * options available:
+     *  - file: string - Attribute image request, default: image
      *  - size: array - final size [x,y] default: [300,300]
      *  - path: string - Destination path
      *  - permission: integer - set permission folder of destination path, default: 777,
      *  - rules: string - Laravel validation format
      * @return array Image Attributes
      */
-    public function UploadImage(Request $req,string $imageAttr = 'image',array $options){
+    public function UploadImage(Request $req,array $options){
         $imageProp = [];
         $_imageValidationRules = isset($options['rules'])? $options['rules']:'image|mimes:jpg,png,jpeg,svg|max:1024';
         $_avatarSize = isset($options['size'])? $options['size']:[300,300];
         $path = $options['path'];
         $permission = isset($options['permission'])? $options['permission']: 777;
+        $imageAttr = isset($options['file'])?$options['file']: 'image';
         $_avatarPath = public_path($path);
         if($req->hasFile($imageAttr)){
             $image = $req->file($imageAttr);
