@@ -1,4 +1,5 @@
 <?php
+namespace App\Traits;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
