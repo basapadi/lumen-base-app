@@ -26,6 +26,12 @@
 - User Login using JWT Auth
 - User Logout
 
+#### Available Helpers
+- config_path()
+- urlGenerator()
+- asset()
+- public_path()
+
 #### Available Features
 - Authentication Middleware
 - Data Pagination
