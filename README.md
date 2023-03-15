@@ -29,3 +29,4 @@
 #### Available Features
 - Authentication Middleware
 - Data Pagination
+- Image Upload
