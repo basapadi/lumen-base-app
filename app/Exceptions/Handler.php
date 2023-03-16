@@ -8,9 +8,14 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
+use App\Traits\StaticResponseTrait;
+use App\Libraries\ApiResponse;
 
 class Handler extends ExceptionHandler
 {
+    
+    use StaticResponseTrait;
+    
     /**
      * A list of the exception types that should not be reported.
      *
@@ -35,6 +40,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }
         parent::report($exception);
     }
 
@@ -49,6 +57,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        if (method_exists($exception, 'getStatusCode')) {
+            $httpCode = $exception->getStatusCode();
+            // start custom code
+            if($httpCode == 404) {
+                $resp = $this->response404('API yang anda cari tidak ditemukan!');
+                return response()->json($resp, $httpCode);
+            } else if ($httpCode == 405) {
+                ApiResponse::setStatusCode($httpCode);
+                $resp = ApiResponse::make(false, $exception->getMessage());
+                
+                return response()->json($resp, $exception->getStatusCode());
+            }
+        } 
+        
+        if(config('app.env') === 'local') return $this->response500($exception);
+        else return parent::render($request, $exception);
     }
 }
