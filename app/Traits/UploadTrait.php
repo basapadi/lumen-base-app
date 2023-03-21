@@ -48,7 +48,7 @@ trait UploadTrait {
      * @author bachtiarpanjaitan <bachtiarpanjaitan0@gmail.com>
      * @param $req Illuminate\Http\Request;
      * @param $options array options available:
-     *  - file: string - Attribute image request, default: image
+     *  - file: string - Attribute request, default: file
      *  - path: string - Destination path
      *  - permission: string - set permission folder of destination path, default: 777,
      * @return array
