@@ -32,6 +32,10 @@ $router->group(['prefix' => 'api'], function() use ($router) {
                      */
                     
                 });
+                $router->get('test', 'TestController@respon');
             });
+
+            //No Authorization
+            
     });
 });
