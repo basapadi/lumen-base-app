@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function() use ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($router) {
     $router->group([
             'prefix' => 'v1', 
         ], function() use ($router) {
