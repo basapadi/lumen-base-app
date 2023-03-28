@@ -127,5 +127,6 @@ $app->router->group([
 $app->configure('app');
 $app->configure('config');
 $app->configure('jwt');
+$app->configure('database');
 
 return $app;
