@@ -27,12 +27,14 @@ $router->group(['prefix' => 'api'], function() use ($router) {
                 $router->group(['prefix' => 'auth'], function() use ($router) {
                     $router->post('logout', 'AuthController@logout');
 
-                    /**
-                     * Write here for authorized routes
-                     */
+                    
                     
                 });
                 $router->get('test', 'TestController@respon');
+                /**
+                 * Write here for authorized routes
+                 */
+                include_once 'modules/purchase.php';
             });
 
             //No Authorization
