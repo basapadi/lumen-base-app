@@ -31,6 +31,10 @@ $router->group(['prefix' => 'api'], function() use ($router) {
                     
                 });
                 $router->get('test', 'TestController@respon');
+                /**
+                 * Write here for authorized routes
+                 */
+                include_once 'modules/purchase.php';
             });
 
             /**

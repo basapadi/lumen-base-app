@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Traits\StaticResponseTrait;
 use App\Models\{
-    Product,
     Purchase,
     PurchaseDetail
 };
