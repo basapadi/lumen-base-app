@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Traits\StaticResponseTrait;
 use App\Models\{
+    Product,
     Purchase,
     PurchaseDetail
 };
@@ -29,7 +30,31 @@ class PurchaseService {
         if ($validated->fails()) {
             return $this->response400($validated->errors()->first());
         }
-        
+
+        // $products = Product::all()->toArray();
+        /**
+         * Cara menggunakan mapping apabila datanya berbentuk array collection
+         */
+        // $modificationProducts = $products->map(function($product){
+        //     if($product->id == 1) {
+        //         $product->description = 'Ini udah di modif y';
+        //         $product->hasModified = true;
+        //     } else $product->hasModified = false;
+        //     return $product;
+        // });
+
+
+        /**
+         * Cara menggunakan mapping apabila datanya berbentuk array
+         */
+        // $modificationProducts = collect($products)->map(function($product){
+        //     if($product['id'] == 1) {
+        //         $product['description'] = 'Ini udah di modif y';
+        //         $product['hasModified'] = true;
+        //     } else $product['hasModified'] = false;
+        //     return $product;
+        // });
+
         try {
             DB::beginTransaction();
             $preInsert = [
@@ -46,7 +71,6 @@ class PurchaseService {
                 $p['purchase_id'] = $purchase->id;
                 return $p;
             })->toArray();
-            // dd($purchaseDetails);
 
             foreach ($purchaseDetails as $key => $pu) {
                 PurchaseDetail::create($pu);
@@ -55,7 +79,6 @@ class PurchaseService {
             return ApiResponse::make(true,'Data Inserted',$purchase);
 
         }catch(Exception $e){
-            DB::rollBack();
             return $this->response500($e);
         }
 
