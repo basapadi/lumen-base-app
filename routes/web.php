@@ -26,15 +26,12 @@ $router->group(['prefix' => 'api'], function() use ($router) {
             $router->group(['middleware' => ['auth', 'auth.header']], function() use ($router) {
                 $router->group(['prefix' => 'auth'], function() use ($router) {
                     $router->post('logout', 'AuthController@logout');
-
-                    
-                    
                 });
-                $router->get('test', 'TestController@respon');
                 /**
                  * Write here for authorized routes
                  */
                 include_once 'modules/purchase.php';
+                include_once 'modules/product.php';
             });
 
             /**

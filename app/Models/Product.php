@@ -11,5 +11,9 @@ class Product extends Model
     public function unit(){
         return $this->hasOne(ProductUnit::class,'id','unit_id');
     }
+
+    public function images(){
+        return $this->hasMany(ProductImage::class, 'product_id','id');
+    }
     
 }
