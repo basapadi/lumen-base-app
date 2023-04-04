@@ -15,6 +15,7 @@
 - nesbot/carbon
 - spatie/laravel-fractal
 - tymon/jwt-auth
+- flipbox/lumen-generator
 
 #### Available Migrations
 - User Migration
