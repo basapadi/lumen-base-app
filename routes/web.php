@@ -37,7 +37,9 @@ $router->group(['prefix' => 'api'], function() use ($router) {
                 include_once 'modules/purchase.php';
             });
 
-            //No Authorization
-            
+            /**
+             * Testing
+             */
+            include_once 'modules/test.php';
     });
 });
