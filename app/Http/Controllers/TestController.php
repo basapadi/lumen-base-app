@@ -23,10 +23,7 @@ class TestController extends Controller {
             return $this->response400($validated->errors()->first());
         }
         $string = $this->terbilang($req->value);
-        return response()->json([
-            'message' => 'OK',
-            'data' => $string
-        ], 200);
+        return response()->json($string, 200);
     }
 
 }
