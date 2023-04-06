@@ -20,5 +20,9 @@ class ProductController extends Controller {
         $result = $this->_service->create($request);
         return response()->json($result, $result['code']);
     }
-
+    public function edit(Request $request){
+        $result = $this->_service->edit($request);
+        return response()->json($result, $result['code']);
+    }
+    
 }
