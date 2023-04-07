@@ -20,8 +20,23 @@ class ProductController extends Controller {
         $result = $this->_service->create($request);
         return response()->json($result, $result['code']);
     }
+
     public function edit(Request $request){
         $result = $this->_service->edit($request);
+        return response()->json($result, $result['code']);
+    }
+
+    public function detail(Request $request,$id){
+        $result = $this->_service->detail($request,$id);
+        return response()->json($result, $result['code']);
+    }
+    public function hapus(Request $request,$id){
+       $result = $this->_service->hapus($request,$id);
+       return response()->json($result, $result['code']);
+    }
+
+    public function list(Request $request){
+        $result = $this->_service->list($request);
         return response()->json($result, $result['code']);
     }
     

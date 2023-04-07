@@ -206,4 +206,19 @@ class ProductService {
 
     }
 
+    public function detail(Request $request,$id){
+        $products = Product::with('unit')->where('id',$id)->get();
+        return ApiResponse::make(true, 'BERHASIL LOAD  DATA',$products);
+    }
+    
+    public function hapus(Request $request,$id){
+        $products = Product::with('unit')->where('id',$id)->delete();
+        return ApiResponse::make(true, 'BERHASIL HAPUS DATA',$products); 
+    }
+
+    public function list(Request $request){
+        $products = Product::with('unit')->get();
+        return ApiResponse::make(true, 'BERHASIL LOAD '.count($products). ' DATA',$products);
+    }
+
 }
