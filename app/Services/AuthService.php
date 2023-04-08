@@ -16,6 +16,31 @@ class AuthService {
     private $_PhoneNumberPattern = '/^([0-9\s\-\+\(\)]*)$/';
     private $_emailPattern = '/(.+)@(.+)\.(.+)/i';
 
+    public function register(Request $req) {
+       
+        $validated = Validator::make($req->all(), [
+            'username' => 'required|string|unique:users',
+            'email' => 'required|string|unique:users',
+            'password' => "required|string:30|regex:{$this->_passwordPattern}"
+        ],[
+            'required' => ':attribute cannot be null and Password must contain String and Number'
+        ]);
+        if ($validated->fails()) {
+            return $this->response400($validated->errors()->first());
+        }
+        //dd($validated);
+        $register =  new User;
+        $register->name = $req->name;
+        $register->username = $req->username;
+        $register->password = Hash::make($req->password);
+        $register->email = $req->email;
+        
+        if(!$register->save()){
+            return $this->response400('Cannot Add New User');
+        }
+        return ApiResponse::make(true,'Data Inserted',$register);
+    }
+
     public function login(Request $req) {
         $validated = Validator::make($req->all(), [
             'username' => 'required|string',
@@ -42,7 +67,7 @@ class AuthService {
 
         return ApiResponse::make(false, 'Username or password not valid');
     }
-
+   
 
     private function _responseWithToken($token) {
         $ttl = auth()->factory()->getTTL() * 60;

@@ -27,4 +27,11 @@ class AuthController extends Controller {
         return response()->json($logout);
     }
 
+    public function register(Request $req) {
+        
+         $result = $this->_auth->register($req);
+        return response()->json($result, $result['code']);  
+        //return response()->json( $req->toArray()); 
+    }
+
 }
