@@ -38,7 +38,7 @@ $router->group(['prefix' => 'api'], function() use ($router) {
              * Testing
              */
             include_once 'modules/test.php';
-
+            /* User Register By Fred */
             $router->post('register', 'AuthController@register');
     });
 });

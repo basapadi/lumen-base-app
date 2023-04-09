@@ -5,5 +5,5 @@ $router->group(['prefix' => 'product'], function() use ($router) {
     $router->post('/edit', 'ProductController@edit');
     $router->get('/{id}',  'ProductController@detail');
     $router->delete('/hapus/{id}',  'ProductController@hapus');
+    $router->get('/list',  'ProductController@list');
 });
-$router->get('products',  'ProductController@list');
