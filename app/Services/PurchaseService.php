@@ -6,7 +6,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Traits\StaticResponseTrait;
+use App\Traits\{
+    StaticResponseTrait,
+    DbTrait
+};
 use App\Models\{
     Purchase,
     PurchaseDetail
@@ -17,7 +20,24 @@ use Carbon\Carbon;
 
 class PurchaseService {
 
-    use StaticResponseTrait;
+    use StaticResponseTrait,DbTrait;
+
+    public function list(Request $request){
+       
+        $preload = Purchase::with(['details'=>function ($query) use($request){
+            //return $this->queryFilters($query);
+            return $query->where('product_id',$request->product_id);
+        }]);
+        
+        //dd($preload->toSql());
+        $total = Purchase::get()->count();
+       /*  $this->queryFilters($preload);
+        $this->limiter($preload);  */
+       // dd($preload->toSql());
+        $purchases = $preload->get();
+        ApiResponse::setIncludeData(['jumlah'=>$purchases->count(),'total'=>$total]);
+        return ApiResponse::make(true, 'BERHASIL LOAD '.count($purchases). ' DATA',$purchases);
+    }
 
     public function create(Request $req){
         $validated = Validator::make($req->all(), [

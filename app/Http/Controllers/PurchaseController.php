@@ -16,6 +16,10 @@ class PurchaseController extends Controller {
         $this->_purchase = $purchase;
     }
 
+    public function list(Request $request){
+        $result = $this->_purchase->list($request);
+        return response()->json($result, $result['code']);
+    }
     public function create(Request $request){
         $result = $this->_purchase->create($request);
         return response()->json($result, $result['code']);

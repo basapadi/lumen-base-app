@@ -45,7 +45,7 @@ trait DbTrait {
         return $model->skip($skip)->take($limit);
     }
 
-    private function queryFilters(eloBuilder &$model){
+    public function queryFilters( &$model){
         $requests = request()->all(); 
         foreach($requests as $key => $value){
             $_filter = explode("_",$key);
@@ -77,6 +77,7 @@ trait DbTrait {
                     break;
                 case 'between':
                     $_between = explode('-',$value);
+                    sort($_between);
                     $_between = array_map('intval',$_between);
                     $model->whereBetween($column,$_between);
                     break;

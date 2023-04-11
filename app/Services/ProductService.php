@@ -259,31 +259,31 @@ class ProductService {
         return ApiResponse::make(true, 'BERHASIL LOAD '.count($products). ' DATA',$products);
     }
 
-    // private function queryFilters(eloBuilder &$model){
-    //     $filters = [];
-    //     $requests = request()->all(); 
-    //     foreach($requests as $key => $value){
-    //         $_filter = explode("_",$key);
-    //         if (count($_filter)<=1) continue;
-    //        // dd($_filter);
-    //         switch ($_filter[count($_filter)-1]) {
-    //             case 'contain':
-    //                 /* dd($_filter);
-    //                 array_push($filters,[$_filter[0]=>$_filter[1]]);*/
-    //                 unset($_filter[count($_filter)-1]);
-    //                 $column= implode("_",$_filter);
-    //                 //dd($column);
-    //                 $model->where($column,"LIKE","%$value%");
-    //                 break;
+    private function queryFilters(eloBuilder &$model){
+        $filters = [];
+        $requests = request()->all(); 
+        foreach($requests as $key => $value){
+            $_filter = explode("_",$key);
+            if (count($_filter)<=1) continue;
+           // dd($_filter);
+            switch ($_filter[count($_filter)-1]) {
+                case 'contain':
+                    /* dd($_filter);
+                    array_push($filters,[$_filter[0]=>$_filter[1]]);*/
+                    unset($_filter[count($_filter)-1]);
+                    $column= implode("_",$_filter);
+                    //dd($column);
+                    $model->where($column,"LIKE","%$value%");
+                    break;
                 
-    //             default:
-    //                 # code...
-    //                 break;
-    //         }
-    //     }
-    //    // dd($model->toSql());
-    //    return $model;
+                default:
+                    # code...
+                    break;
+            }
+        }
+       // dd($model->toSql());
+       return $model;
 
-    // }
+    }
 
 }

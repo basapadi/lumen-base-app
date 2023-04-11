@@ -11,4 +11,8 @@ class PurchaseDetail extends Model
     protected $fillable = [
         'purchase_id', 'product_id','qty','price'
     ];
+    
+    public function purchase(){
+        return $this->hasOne(Purchase::class, 'id','purchase_id');
+    }
 }
