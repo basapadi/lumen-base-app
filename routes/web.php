@@ -28,9 +28,12 @@ $router->group(['prefix' => 'api'], function() use ($router) {
                     $router->post('logout', 'AuthController@logout');
                 });
                 /**
-                 * Write here for authorized routes
+                 * Write here for authorized routes for Cashier
                  */
-                include_once 'modules/purchase.php';
+                $router->group(['middleware' => ['cashier']], function() use ($router) {
+                    include_once 'modules/purchase.php';
+                });
+                
                 include_once 'modules/product.php';
             });
 

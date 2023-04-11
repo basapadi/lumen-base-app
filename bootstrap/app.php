@@ -86,7 +86,8 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'auth.header' => App\Http\Middleware\AuthHeader::class
+    'auth.header' => App\Http\Middleware\AuthHeader::class,
+    'cashier' => App\Http\Middleware\Cashier::class
 ]);
 
 /*
