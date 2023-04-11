@@ -4,6 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Traits\StaticResponseTrait;
+use App\Statics\RoleStatic;
+use App\Models\{
+    Role,
+    RoleModule
+};
 
 class Cashier {
 
@@ -22,10 +27,17 @@ class Cashier {
             $payload = auth()->payload();
             $userId = $payload->get('sub');
             if ($userId) {
-                if(auth()->user()->role != 2) {
+                $rm = RoleModule::with('module','role')->where('role_id', auth()->user()->role)->first();
+                if(empty($rm)) {
                     $resp = $this->response401();
                     return response()->json($resp, 401);
                 }
+                /**
+                 * Validasi ACL berdasarkan RoleModule dan URI di module
+                 */
+                
+                $resp = $this->response401();
+                return response()->json($resp, 401);
 
                 // check if invalid BSON string
                 $request->merge(['user_id' => $userId]);

@@ -7,8 +7,8 @@ namespace App\Statics;
  * @author bachtiarpanjaitan <bachtiarpanjaitan0@gmail.com>
  * @since 4 April 2023
  */
-class ProductTypeStatic {
+class RoleStatic {
     
-    static $SINGLE = 0;
-    static $GROUP = 1;
+    static $ADMIN = 1;
+    static $CASHIER = 2;
 }
