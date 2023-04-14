@@ -91,7 +91,7 @@ trait QueryFilter {
             if($key == '_sort'){
                 $sort = explode(':',$value);
                 if(count($sort) < 2) continue;
-                $model->orderBy(trim($sort[0]),trim($sort[1]));
+                if(!empty($sort[0]) && !empty($sort[1])) $model->orderBy(trim($sort[0]),trim($sort[1]));
             }
         }
         $model->skip($skip)->take($limit);
