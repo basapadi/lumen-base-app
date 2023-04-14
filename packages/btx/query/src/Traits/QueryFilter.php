@@ -23,8 +23,8 @@ trait QueryFilter {
      * @return Illuminate\Database\Eloquent\Builder
      */
     public function limiter(eloBuilder &$model, int $defaultLimit = 10) {
-        $page = (int) request('page');
-        $limit = (int) request('limit');
+        $page = (int) request('_page');
+        $limit = (int) request('_limit');
         
         if ($defaultLimit == -1) {
             return $model;
