@@ -15,7 +15,7 @@ class ColumnTransformer extends TransformerAbstract {
     */
     public function transform($resp) {
         $align = 'left';
-        if(isset($resp->align)) $align = $resp->align;
+        if(isset($resp['align'])) $align = $resp['align'];
         return [
             'name' => $resp['value'],
             'required' => true,
