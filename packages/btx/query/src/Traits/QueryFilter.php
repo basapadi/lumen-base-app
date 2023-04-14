@@ -135,13 +135,13 @@ trait QueryFilter {
             $_values = array_map('intval',$_values);
             $value = $_values;
         }
-        if(empty($value)) {
+        if(empty($value) && $value != 0) {
             $query->{$op['q']}($column);
-        } elseif(isset($op['a']) && isset($op['s']) && isset($op['q']))
+        }
+        elseif(isset($op['a']) && isset($op['s']) && isset($op['q']))
             $query->{$op['q']}($column,$op['s'],$op['a'].$value.$op['a']);
         elseif (isset($op['s']) && isset($op['q']))
             $query->{$op['q']}($column,$op['s'],$value);
-        elseif (isset($op['q'])) $query->{$op['q']}($column,$value);
-        
+        elseif (!isset($op['s']) && isset($op['q'])) $query->{$op['q']}($column,$value);
     }
 }
