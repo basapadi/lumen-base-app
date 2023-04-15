@@ -30,7 +30,7 @@ $router->group(['prefix' => 'api'], function() use ($router) {
                 /**
                  * Write here for authorized routes for Cashier
                  */
-                $router->group(['middleware' => ['cashier']], function() use ($router) {
+                $router->group(['middleware' => []], function() use ($router) {
                     include_once 'modules/purchase.php';
                 });
                 

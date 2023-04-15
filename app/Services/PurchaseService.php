@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Traits\{
     StaticResponseTrait,
-    DbTrait
 };
 use App\Models\{
     Purchase,
@@ -17,23 +16,17 @@ use App\Models\{
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Btx\QueryFilter\Traits\QueryFilter;
 
 class PurchaseService {
 
-    use StaticResponseTrait,DbTrait;
+    use StaticResponseTrait,QueryFilter;
 
     public function list(Request $request){
        
-        $preload = Purchase::with(['details'=>function ($query) use($request){
-            //return $this->queryFilters($query);
-            return $query->where('product_id',$request->product_id);
-        }]);
-        
-        //dd($preload->toSql());
+        $preload = Purchase::with('details');
+        $this->filter($preload);
         $total = Purchase::get()->count();
-       /*  $this->queryFilters($preload);
-        $this->limiter($preload);  */
-       // dd($preload->toSql());
         $purchases = $preload->get();
         ApiResponse::setIncludeData(['jumlah'=>$purchases->count(),'total'=>$total]);
         return ApiResponse::make(true, 'BERHASIL LOAD '.count($purchases). ' DATA',$purchases);
@@ -49,30 +42,6 @@ class PurchaseService {
         if ($validated->fails()) {
             return $this->response400($validated->errors()->first());
         }
-
-        // $products = Product::all()->toArray();
-        /**
-         * Cara menggunakan mapping apabila datanya berbentuk array collection
-         */
-        // $modificationProducts = $products->map(function($product){
-        //     if($product->id == 1) {
-        //         $product->description = 'Ini udah di modif y';
-        //         $product->hasModified = true;
-        //     } else $product->hasModified = false;
-        //     return $product;
-        // });
-
-
-        /**
-         * Cara menggunakan mapping apabila datanya berbentuk array
-         */
-        // $modificationProducts = collect($products)->map(function($product){
-        //     if($product['id'] == 1) {
-        //         $product['description'] = 'Ini udah di modif y';
-        //         $product['hasModified'] = true;
-        //     } else $product['hasModified'] = false;
-        //     return $product;
-        // });
 
         try {
             DB::beginTransaction();
