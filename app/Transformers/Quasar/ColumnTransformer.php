@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers;
+namespace App\Transformers\Quasar;
 
 use League\Fractal\TransformerAbstract;
 use App\Models\Marketplace\PurchaseHistoryModel;
