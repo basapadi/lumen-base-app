@@ -12,28 +12,27 @@ use Btx\QueryFilter\Statics\Operator;
 trait QueryFilter {
     
     private $_defaultLimit;
+    private $_config;
+    private $_request;
+
     public function setDefaultLimit(int $limit) {
         $this->_defaultLimit = $limit;
     }
     
     /**
-     * limiter record for model
+     * DEPRECATED: limiter record for model
      * @param Illuminate\Database\Eloquent\Builder $model
      * @param int $defaultLimit
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function limiter(eloBuilder &$model, int $defaultLimit = 10) {
-        $page = (int) request('_page');
-        $limit = (int) request('_limit');
+    public function limiter(eloBuilder &$model, int $defaultLimit = null) {
+        $this->_init();
+        $page = (int) $this->_request['_page'];
+        $limit = (int) $this->_request['_limit'];
+        if(!empty($defaultLimit)) $limit = $defaultLimit;
         
-        if ($defaultLimit == -1) {
+        if ($limit == -1) {
             return $model;
-        }
-        
-        if (!empty($this->_defaultLimit)) {
-            $limit = $this->_defaultLimit;
-        } elseif (empty($limit)) {
-            $limit = $defaultLimit;
         }
         
         if ($page > 1) {
@@ -52,10 +51,10 @@ trait QueryFilter {
      * @return Illuminate\Database\Eloquent\Builder
      */
     public function filter( &$model){
-        $requests = request()->all(); 
+        $this->_init();
         $page = 1;
-        $limit = 10;
-        foreach($requests as $key => $value){
+        $limit = $this->_request['_limit'];
+        foreach($this->_request as $key => $value){
             $relation = explode('__', $key);
             $table = [];
             if(count($relation) >= 2) {
@@ -143,5 +142,17 @@ trait QueryFilter {
         elseif (isset($op['s']) && isset($op['q']))
             $query->{$op['q']}($column,$op['s'],$value);
         elseif (!isset($op['s']) && isset($op['q'])) $query->{$op['q']}($column,$value);
+    }
+
+    private function _init(){
+        $this->_config = config('btx');
+        $request = request()->all();
+        if(isset($request['_limit'])){
+            $max = (int) $this->_config['max_query_limit'];
+            if((int) $request['_limit'] > $max) $request['_limit'] = (int) $max;
+        } else $request['_limit'] = 10;
+
+        $this->_request = $request;
+        if(empty($this->_config)) throw 'Config file not found';
     }
 }
