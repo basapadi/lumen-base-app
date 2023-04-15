@@ -45,68 +45,6 @@ trait DbTrait {
         return $model->skip($skip)->take($limit);
     }
 
-    public function queryFilters( &$model){
-        $requests = request()->all(); 
-        foreach($requests as $key => $value){
-            $_filter = explode("_",$key);
-            if (count($_filter)<=1) continue;
-            $_filter_name = $_filter[count($_filter)-1];
-            unset($_filter[count($_filter)-1]);
-            $column = implode("_",$_filter);
-            switch ($_filter_name) {
-                case 'contain':
-                    $model->where($column,"LIKE","%$value%");
-                    break;
-                case 'gte':
-                    $model->where($column,">=",$value);
-                    break;
-                case 'lte':
-                    $model->where($column,"<=",$value);
-                    break;
-                case 'gt':
-                    $model->where($column,">",$value);
-                    break;
-                case 'lt':
-                    $model->where($column,"<",$value);
-                    break;
-                case 'eq':
-                    $model->where($column,"=",$value);
-                    break;
-                case 'ne':
-                    $model->where($column,"<>",$value);
-                    break;
-                case 'between':
-                    $_between = explode('-',$value);
-                    sort($_between);
-                    $_between = array_map('intval',$_between);
-                    $model->whereBetween($column,$_between);
-                    break;
-                case 'null':
-                    $model->whereNull($column);
-                    break;
-                case 'notnull':
-                    $model->whereNotNull($column);
-                    break;
-                case 'in':
-                    $_in = explode(',',$value);
-                    $_in = array_map('intval',$_in);
-                    $model->whereIn($column,$_in);
-                    break;
-                case 'notin':
-                    $_notin = explode(',',$value);
-                    $_notin = array_map('intval',$_notin);
-                    $model->whereNotIn($column,$_notin);
-                    break;
-                default:
-                    # code...
-                    break;
-            }
-        }
-       // dd($model->toSql());
-       return $model;
-
-    }
-
     /**
      * Query Filters
      * @param Illuminate\Database\Eloquent\Builder $model
