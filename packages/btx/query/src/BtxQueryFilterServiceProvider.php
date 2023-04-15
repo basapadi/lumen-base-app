@@ -13,7 +13,9 @@ class BtxQueryFilterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // include __DIR__.'/Constants/Operator.php';
+        $this->publishes([
+            __DIR__.'/config/btx.php' => config_path('btx.php'),
+        ], 'config');
     }
 
     /**
@@ -23,6 +25,6 @@ class BtxQueryFilterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfigFrom( __DIR__.'/config/btx.php', 'btx');
     }
 }
