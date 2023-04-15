@@ -1,5 +1,8 @@
 ## Lumen Base App 
- This lumen base project can use for production project but **not recommended**. Maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository.
+ This lumen base project can use for production project but **not recommended**. Maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository. 
+ 
+#### Documentation
+> See full documentation at [Wiki Documentation](https://github.com/Bataxdev/lumen-base-app/wiki)
 
 #### Author
 > Bachtiar Panjaitan <bachtiarpanjaitan0@gmail.com>
