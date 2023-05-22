@@ -2,6 +2,7 @@
 namespace App\Traits;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 
 
 trait UploadTrait {
@@ -35,8 +36,11 @@ trait UploadTrait {
             if (!file_exists($_avatarPath)) {
                 mkdir($_avatarPath, $permission, true);
             }
-            $objImage = Image::make($image->path());
-            $objImage->resize($_avatarSize[0], $_avatarSize[1])->save($_avatarPath.'/'. $imageProp['filename']);
+            $manager = new ImageManager(['driver' => 'gd']);
+            $objImage = $manager->make($image->path());
+            $objImage->resize($_avatarSize[0],null,function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($_avatarPath.'/'. $imageProp['filename']);
 
             $imageProp['path'] = url($path).'/'.$imageProp['filename'];
             return  $imageProp;
