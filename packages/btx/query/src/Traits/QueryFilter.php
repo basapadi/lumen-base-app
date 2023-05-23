@@ -130,14 +130,15 @@ trait QueryFilter {
      * Generate query
      */
     private function _generator(&$query,$column,$value,$op,$filter){
-        if(in_array($filter,['in','notin'])){
+        if(in_array($filter,['in','notin','between'])){
             $_values = explode(',',$value);
-            $_values = array_map('intval',$_values);
-            $value = $_values;
+            if(count($_values) == 2) $query->{$op['q']}($column, $_values);
         }
-        if(empty($value) && $value != 0) {
+        elseif(in_array($filter,['null','notnull'])){
             $query->{$op['q']}($column);
         }
+        elseif(empty($value) && $value != 0) 
+            $query->{$op['q']}($column);
         elseif(isset($op['a']) && isset($op['s']) && isset($op['q']))
             $query->{$op['q']}($column,$op['s'],$op['a'].$value.$op['a']);
         elseif (isset($op['s']) && isset($op['q']))
