@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Traits\{
     StaticResponseTrait,
-    UploadTrait,
-    DbTrait
+    UploadTrait
 };
 use App\Models\{
     Product,
@@ -21,13 +20,14 @@ use Carbon\Carbon;
 use App\Statics\ProductTypeStatic;
 use Illuminate\Database\Eloquent\Model;
 use stdClass;
+use Btx\QueryFilter\Traits\QueryFilter;
 
 
 use function PHPUnit\Framework\isEmpty;
 
 class ProductService {
 
-    use StaticResponseTrait,UploadTrait,DbTrait;
+    use StaticResponseTrait,UploadTrait,QueryFilter;
 
     public function create(Request $request){
         $productTypes = [ProductTypeStatic::$SINGLE, ProductTypeStatic::$GROUP];
@@ -251,39 +251,10 @@ class ProductService {
         $preload = Product::with('unit','images');
 
         $total = Product::get()->count();
-        $this->queryFilters($preload);
-        $this->limiter($preload); 
-       // dd($preload->toSql());
+        $this->filter($preload);
         $products = $preload->get();
         ApiResponse::setIncludeData(['jumlah'=>$products->count(),'total'=>$total]);
         return ApiResponse::make(true, 'BERHASIL LOAD '.count($products). ' DATA',$products);
-    }
-
-    private function queryFilters(eloBuilder &$model){
-        $filters = [];
-        $requests = request()->all(); 
-        foreach($requests as $key => $value){
-            $_filter = explode("_",$key);
-            if (count($_filter)<=1) continue;
-           // dd($_filter);
-            switch ($_filter[count($_filter)-1]) {
-                case 'contain':
-                    /* dd($_filter);
-                    array_push($filters,[$_filter[0]=>$_filter[1]]);*/
-                    unset($_filter[count($_filter)-1]);
-                    $column= implode("_",$_filter);
-                    //dd($column);
-                    $model->where($column,"LIKE","%$value%");
-                    break;
-                
-                default:
-                    # code...
-                    break;
-            }
-        }
-       // dd($model->toSql());
-       return $model;
-
     }
 
 }
