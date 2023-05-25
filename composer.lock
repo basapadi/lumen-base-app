@@ -68,28 +68,29 @@
         },
         {
             "name": "btx/btx",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bachtiarpanjaitan/btx.git",
-                "reference": "5c0a77c96ed25e9f124e0edbcb6cb5111e03e88a"
+                "reference": "6c44197911a5209a68011c0aa505c057f63a1280"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bachtiarpanjaitan/btx/zipball/5c0a77c96ed25e9f124e0edbcb6cb5111e03e88a",
-                "reference": "5c0a77c96ed25e9f124e0edbcb6cb5111e03e88a",
+                "url": "https://api.github.com/repos/bachtiarpanjaitan/btx/zipball/6c44197911a5209a68011c0aa505c057f63a1280",
+                "reference": "6c44197911a5209a68011c0aa505c057f63a1280",
                 "shasum": ""
             },
             "require": {
-                "intervention/image": "^2.7"
+                "intervention/image": "^2.7",
+                "php": ">= 7.4.0"
             },
-            "type": "metapackage",
+            "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Btx\\File\\": "btx/file/src",
-                    "Btx\\Http\\": "btx/http/src",
-                    "Btx\\Query\\": "btx/query/src",
-                    "Btx\\Common\\": "btx/common/src"
+                    "Btx\\File\\": "file/src",
+                    "Btx\\Http\\": "http/src",
+                    "Btx\\Query\\": "query/src",
+                    "Btx\\Common\\": "common/src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -99,15 +100,17 @@
             "authors": [
                 {
                     "name": "bachtiarpanjaitan",
-                    "email": "bachtiarpanjaitan0@gmail.com"
+                    "email": "bachtiarpanjaitan0@gmail.com",
+                    "homepage": "https://bataxdev.com",
+                    "role": "Author"
                 }
             ],
-            "description": "a common package for laravel framework",
+            "description": "Additional package for laravel framework",
             "support": {
                 "issues": "https://github.com/bachtiarpanjaitan/btx/issues",
-                "source": "https://github.com/bachtiarpanjaitan/btx/tree/1.0.0"
+                "source": "https://github.com/bachtiarpanjaitan/btx/tree/1.0.1"
             },
-            "time": "2023-05-25T07:54:28+00:00"
+            "time": "2023-05-25T09:31:26+00:00"
         },
         {
             "name": "classpreloader/classpreloader",
