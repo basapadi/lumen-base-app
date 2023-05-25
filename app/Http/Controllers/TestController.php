@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Traits\TerbilangTrait;
+use Btx\Common\Traits\Terbilang;
 use App\Traits\StaticResponseTrait;
 use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller {
 
-    use TerbilangTrait,StaticResponseTrait;
+    use Terbilang,StaticResponseTrait;
 
     public function bilangan(Request $req) {
         $validated = Validator::make($req->all(), [

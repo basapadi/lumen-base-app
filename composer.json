@@ -25,7 +25,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Btx\\QueryFilter\\":"/Users/bachtiarpanjaitan/Documents/bachtiarpanjaitan/projects/develop/btx/btx/query/src/"
+            "Btx\\Query\\":"/Users/bachtiarpanjaitan/Documents/bachtiarpanjaitan/projects/develop/btx/query/src/",
+            "Btx\\Http\\":"/Users/bachtiarpanjaitan/Documents/bachtiarpanjaitan/projects/develop/btx/http/src/",
+            "Btx\\File\\":"/Users/bachtiarpanjaitan/Documents/bachtiarpanjaitan/projects/develop/btx/file/src/"
         },
         "files": [
             "app/Helpers/lumen_helpers.php"

@@ -1,33 +1,23 @@
 <?php
 namespace App\Services;
-use Illuminate\Database\Eloquent\Builder as eloBuilder;
 use App\Libraries\ApiResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Traits\{
-    StaticResponseTrait,
-    UploadTrait
-};
 use App\Models\{
     Product,
     ProductImage
 };
-use Exception;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use App\Statics\ProductTypeStatic;
-use Illuminate\Database\Eloquent\Model;
-use stdClass;
-use Btx\QueryFilter\Traits\QueryFilter;
-
-
-use function PHPUnit\Framework\isEmpty;
+use Btx\{
+    Http\Traits\StaticResponse,
+    File\Traits\Upload
+};
 
 class ProductService {
 
-    use StaticResponseTrait,UploadTrait,QueryFilter;
+    use StaticResponse,Upload;
 
     public function create(Request $request){
         $productTypes = [ProductTypeStatic::$SINGLE, ProductTypeStatic::$GROUP];
@@ -248,13 +238,10 @@ class ProductService {
     }
 
     public function list(Request $request){
-        $preload = Product::with('unit','images');
-
-        $total = Product::get()->count();
-        $this->filter($preload);
+        $preload = Product::with('unit','images','unit.category')->filter();
+        $total = Product::select('id')->filter(false);
         $products = $preload->get();
-        ApiResponse::setIncludeData(['jumlah'=>$products->count(),'total'=>$total]);
-        return ApiResponse::make(true, 'BERHASIL LOAD '.count($products). ' DATA',$products);
+        return $this->response200('Data loaded',$products,['total'=>$total->count()]);
     }
 
 }
