@@ -8,14 +8,12 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
-use App\Traits\StaticResponseTrait;
-use App\Libraries\ApiResponse;
+use Btx\Http\Traits\StaticResponse;
+use Btx\Http\Libraries\ApiResponse;
 
 class Handler extends ExceptionHandler
 {
-    
-    use StaticResponseTrait;
-    
+    use StaticResponse;
     /**
      * A list of the exception types that should not be reported.
      *
@@ -40,9 +38,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        if (app()->bound('sentry') && $this->shouldReport($exception)) {
-            app('sentry')->captureException($exception);
-        }
         parent::report($exception);
     }
 

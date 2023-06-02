@@ -68,24 +68,48 @@
         },
         {
             "name": "btx/btx",
-            "version": "1.0.1",
+            "version": "1.0.103",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bachtiarpanjaitan/btx.git",
-                "reference": "6c44197911a5209a68011c0aa505c057f63a1280"
+                "reference": "0a9e3547b734f2fd7b82d01ce8b5018003442fde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bachtiarpanjaitan/btx/zipball/6c44197911a5209a68011c0aa505c057f63a1280",
-                "reference": "6c44197911a5209a68011c0aa505c057f63a1280",
+                "url": "https://api.github.com/repos/bachtiarpanjaitan/btx/zipball/0a9e3547b734f2fd7b82d01ce8b5018003442fde",
+                "reference": "0a9e3547b734f2fd7b82d01ce8b5018003442fde",
                 "shasum": ""
             },
             "require": {
                 "intervention/image": "^2.7",
-                "php": ">= 7.4.0"
+                "league/fractal": "^0.19.2",
+                "php": ">= 7.4.0",
+                "spatie/laravel-fractal": "^5.8"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing."
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Btx\\Query",
+                        "Btx\\Http",
+                        "Btx\\File",
+                        "Btx\\Common"
+                    ],
+                    "aliases": {
+                        "BtxQuery": "Btx\\Query",
+                        "BtxFile": "Btx\\File",
+                        "BtxHttp": "Btx\\Http",
+                        "BtxCommon": "Btx\\Common"
+                    }
+                }
+            },
             "autoload": {
+                "files": [
+                    "helpers/lumen.php"
+                ],
                 "psr-4": {
                     "Btx\\File\\": "file/src",
                     "Btx\\Http\\": "http/src",
@@ -101,16 +125,22 @@
                 {
                     "name": "bachtiarpanjaitan",
                     "email": "bachtiarpanjaitan0@gmail.com",
-                    "homepage": "https://bataxdev.com",
+                    "homepage": "https://bataxdev.com/about",
                     "role": "Author"
                 }
             ],
-            "description": "Additional package for laravel framework",
+            "description": "General additional package for laravel framework",
+            "keywords": [
+                "bachtiarpanjaitan",
+                "bataxdev",
+                "btx",
+                "spellnumber"
+            ],
             "support": {
                 "issues": "https://github.com/bachtiarpanjaitan/btx/issues",
-                "source": "https://github.com/bachtiarpanjaitan/btx/tree/1.0.1"
+                "source": "https://github.com/bachtiarpanjaitan/btx/tree/1.0.103"
             },
-            "time": "2023-05-25T09:31:26+00:00"
+            "time": "2023-05-26T01:01:28+00:00"
         },
         {
             "name": "classpreloader/classpreloader",

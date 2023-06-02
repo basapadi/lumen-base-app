@@ -11,13 +11,12 @@ use App\Models\{
 use Illuminate\Support\Facades\DB;
 use App\Statics\ProductTypeStatic;
 use Btx\{
-    Http\Traits\StaticResponse,
     File\Traits\Upload
 };
 
-class ProductService {
+class ProductService extends Service {
 
-    use StaticResponse,Upload;
+    use Upload;
 
     public function create(Request $request){
         $productTypes = [ProductTypeStatic::$SINGLE, ProductTypeStatic::$GROUP];
@@ -238,9 +237,8 @@ class ProductService {
     }
 
     public function list(Request $request){
-        $preload = Product::with('unit','images','unit.category')->filter();
+        $products = Product::with('unit','images','unit.category')->filter()->get();
         $total = Product::select('id')->filter(false);
-        $products = $preload->get();
         return $this->response200('Data loaded',$products,['total'=>$total->count()]);
     }
 
