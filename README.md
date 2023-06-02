@@ -1,5 +1,5 @@
 ## Lumen Base App 
- This lumen framework as base project, maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository. 
+ This lumen framework as base project, maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository. This project has integrated with Btx Package.
 
 ## Instalation
 Install project by using the Composer create-project command in your terminal:
