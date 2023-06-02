@@ -21,7 +21,7 @@ class Users extends Migration
             $table->string('password');
             $table->text('avatar')->nullable();
             $table->integer('role')->nullable();
-            $table->boolean('is_active')->nullable()->default(true);
+            $table->boolean('is_active')->nullable()->default(false);
             $table->timestamps();
         });
     }

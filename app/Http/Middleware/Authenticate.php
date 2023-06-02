@@ -4,11 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
-use App\Traits\StaticResponseTrait;
+use Btx\Http\Response;
 
 class Authenticate
 {
-    use StaticResponseTrait;
     
     /**
      * The authentication guard factory instance.
@@ -39,7 +38,7 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            $resp = $this->response401();
+            $resp = Response::unauthorized();
             return response()->json($resp, $resp['code']);
         }
 
