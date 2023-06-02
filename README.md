@@ -1,5 +1,9 @@
 ## Lumen Base App 
  This lumen base project can use for production project but **not recommended**. Maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository. 
+
+## Instalation
+Install project by using the Composer create-project command in your terminal:
+<code>composer create-project --prefer-dist btx/lumen blog</code>
  
 #### Documentation
 > See full documentation at [Wiki Documentation](https://github.com/Bataxdev/lumen-base-app/wiki)
