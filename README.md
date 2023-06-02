@@ -1,12 +1,13 @@
 ## Lumen Base App 
- This lumen base project can use for production project but **not recommended**. Maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository. 
+ This lumen framework as base project, maybe project structure has been added,removed or modified. If you want request new feature on this project you can create new issue on this repository. 
 
 ## Instalation
 Install project by using the Composer create-project command in your terminal:
+
 <code>composer create-project --prefer-dist btx/lumen blog</code>
  
-#### Documentation
-> See full documentation at [Wiki Documentation](https://github.com/Bataxdev/lumen-base-app/wiki)
+#### Documentation Btx Package
+> See full documentation at [Wiki Documentation](https://github.com/bachtiarpanjaitan/btx/wiki)
 
 #### Author
 > Bachtiar Panjaitan <bachtiarpanjaitan0@gmail.com>
@@ -17,10 +18,6 @@ Install project by using the Composer create-project command in your terminal:
 
 #### Installed Packages
 - doctrine/dbal
-- intervention/image
-- league/fractal
-- nesbot/carbon
-- spatie/laravel-fractal
 - tymon/jwt-auth
 - flipbox/lumen-generator
 
@@ -39,8 +36,3 @@ Install project by using the Composer create-project command in your terminal:
 - urlGenerator()
 - asset()
 - public_path()
-
-#### Available Features
-- Authentication Middleware
-- Data Pagination
-- Image Upload
