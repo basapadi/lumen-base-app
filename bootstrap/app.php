@@ -118,7 +118,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Intervention\Image\ImageServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-$app->register(Btx\Query\BtxQueryFilterServiceProvider::class);
+$app->register(Btx\Query\BtxQueryServiceProvider::class);
 $app->register(Btx\File\BtxFileServiceProvider::class);
 $app->register(Btx\Http\BtxHttpServiceProvider::class);
 $app->register(Btx\Common\BtxCommonServiceProvider::class);
