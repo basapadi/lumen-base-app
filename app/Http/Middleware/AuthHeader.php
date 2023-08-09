@@ -3,11 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Traits\StaticResponseTrait;
+use Btx\Http\Response;
 
 class AuthHeader {
-
-    use StaticResponseTrait;
 
     /**
      * Handle an incoming request.
@@ -27,13 +25,13 @@ class AuthHeader {
                 return $next($request);
             }
 
-            $resp = $this->response401();
+            $resp = Response::unauthorized();
             return response()->json($resp, 401);
         } catch (\InvalidArgumentException $e) {
-            $resp = $this->response401();
+            $resp = Response::unauthorized();
             return response()->json($resp, 401);
         } catch (\Exception $e) {
-            $resp = $this->response500($e->getMessage());
+            $resp = Response::internalServerError($e->getMessage());
             return response()->json($resp, 500);
         }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
-use App\Libraries\ApiResponse;
+use Btx\Http\Response;
 
 class AuthController extends Controller {
     private $_auth;
@@ -23,7 +23,7 @@ class AuthController extends Controller {
 
     public function logout() {
         auth()->logout();
-        $logout = ApiResponse::make(true, 'Successfully logged out');
+        $logout = Response::ok('Successfully logged out');
         return response()->json($logout);
     }
 

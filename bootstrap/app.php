@@ -48,6 +48,14 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+/**
+ * Aliases
+ */
+
+if (!class_exists('BtxResponse')) {
+    class_alias(Btx\Http\Response::class, 'BtxResponse');
+}
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -60,6 +68,10 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('config');
+$app->configure('jwt');
+$app->configure('database');
+$app->configure('btx');
 
 /*
 |--------------------------------------------------------------------------
@@ -106,7 +118,10 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Intervention\Image\ImageServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-$app->register(Btx\QueryFilter\BtxQueryFilterServiceProvider::class);
+$app->register(Btx\Query\BtxQueryServiceProvider::class);
+$app->register(Btx\File\BtxFileServiceProvider::class);
+$app->register(Btx\Http\BtxHttpServiceProvider::class);
+$app->register(Btx\Common\BtxCommonServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -124,10 +139,5 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
-
-$app->configure('app');
-$app->configure('config');
-$app->configure('jwt');
-$app->configure('database');
 
 return $app;

@@ -8,13 +8,10 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
-use App\Traits\StaticResponseTrait;
-use App\Libraries\ApiResponse;
+use Btx\Http\Response;
 
 class Handler extends ExceptionHandler
 {
-    
-    use StaticResponseTrait;
     
     /**
      * A list of the exception types that should not be reported.
@@ -61,17 +58,16 @@ class Handler extends ExceptionHandler
             $httpCode = $exception->getStatusCode();
             // start custom code
             if($httpCode == 404) {
-                $resp = $this->response404('API yang anda cari tidak ditemukan!');
+                $resp = Response::notFound('Route not found!');
                 return response()->json($resp, $httpCode);
             } else if ($httpCode == 405) {
-                ApiResponse::setStatusCode($httpCode);
-                $resp = ApiResponse::make(false, $exception->getMessage());
+                $resp = Response::notAllowed(false, $exception->getMessage());
                 
                 return response()->json($resp, $exception->getStatusCode());
             }
         } 
         
-        if(config('app.env') === 'local') return $this->response500($exception);
+        if(config('app.env') === 'local') return Response::internalServerError($exception,[]);
         else return parent::render($request, $exception);
     }
 }
