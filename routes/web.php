@@ -22,7 +22,8 @@ $router->group(['prefix' => 'api'], function() use ($router) {
             'prefix' => 'v1', 
         ], function() use ($router) {
             $router->post('/auth/login', 'AuthController@login');
-
+            $router->post('/auth/register', 'AuthController@register');
+            $router->get('/auth/register/verify', 'AuthController@verify');
             $router->group(['middleware' => ['auth', 'auth.header']], function() use ($router) {
                 $router->group(['prefix' => 'auth'], function() use ($router) {
                     $router->post('logout', 'AuthController@logout');

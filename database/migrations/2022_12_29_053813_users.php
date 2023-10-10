@@ -14,13 +14,18 @@ class Users extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
             $table->string('username');
             $table->string('email');
-            $table->string('password');
+            $table->text('password');
+            $table->boolean('verified')->default(false);
             $table->text('avatar')->nullable();
-            $table->integer('role')->nullable();
+            $table->tinyInteger('role')->nullable();
+            $table->tinyInteger('level')->default(1);
+            $table->string('zip_code',6)->nullable();
+            $table->string('adm_1',15)->nullable();
+            $table->string('adm_2',15)->nullable();
             $table->boolean('is_active')->nullable()->default(false);
             $table->timestamps();
         });

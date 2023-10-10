@@ -21,6 +21,16 @@ class AuthController extends Controller {
         return response()->json($result, $result['code']);
     }
 
+    public function register(Request $req) {
+        $result = $this->_auth->register($req);
+        return response()->json($result, $result['code']);
+    }
+
+    public function verify(Request $req) {
+        $result = $this->_auth->accountSyncVerify($req);
+        return response()->json($result, $result['code']);
+    }
+
     public function logout() {
         auth()->logout();
         $logout = Response::ok('Successfully logged out');
