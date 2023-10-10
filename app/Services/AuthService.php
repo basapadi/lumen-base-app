@@ -151,7 +151,6 @@ class AuthService extends Service {
 
     /**
      * create token credential
-     * @author masdeveloper <sigit.developer@gmail.com>
      * @param string $type, tipe kredensial 'register' / 'fp' (forgot password)
      * @return type
      */
@@ -174,7 +173,6 @@ class AuthService extends Service {
 
     /**
      * check if token exists
-     * @author masdeveloper <sigit.developer@gmail.com>
      * @param string $email
      * @param string $token
      * @param string $type
