@@ -26,14 +26,13 @@ class AuthService extends Service {
         }
 
         $user = User::where('username', $req->username)->first();
-       
+        if(empty($user)) return Response::badRequest('user not found');
         if(isset($user->is_active)){
             if(!$user->is_active) return Response::badRequest('Your account has been disabled');
         }
         if ($user) {
 
             if (Hash::check($req->password, $user->password)) {
-                // dd($user);
                 $token = auth()->login($user);
                 $data = $this->_responseWithToken($token);
                 return Response::ok('Token generated', $data);
