@@ -107,6 +107,12 @@ class AuthService extends Service {
         $validated = Validator::make($req->all(), [
             'token' => 'required|string|min:64|max:64',
             'email' => 'required|email',
+        ],[
+            'required' => ':attribute cannot be null',
+            'email' => ':email must be email format',
+            'token.min' => ':attribute minimal character 64',
+            'token.max' => ':attribute maximal character 64',
+            'string' => ':attribute must be as string'
         ]);
         if ($validated->fails()) {
             return Response::badRequest($validated->errors()->first());
