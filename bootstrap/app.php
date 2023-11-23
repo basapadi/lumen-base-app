@@ -72,6 +72,8 @@ $app->configure('config');
 $app->configure('jwt');
 $app->configure('database');
 $app->configure('btx');
+$app->configure('auth');
+$app->configure('mail');
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +124,7 @@ $app->register(Btx\Query\BtxQueryServiceProvider::class);
 $app->register(Btx\File\BtxFileServiceProvider::class);
 $app->register(Btx\Http\BtxHttpServiceProvider::class);
 $app->register(Btx\Common\BtxCommonServiceProvider::class);
+$app->register(\Illuminate\Mail\MailServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
